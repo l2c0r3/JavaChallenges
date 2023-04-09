@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>_2_math</module>
+        <module>_x_solution</module>
     </modules>
 
 </project>

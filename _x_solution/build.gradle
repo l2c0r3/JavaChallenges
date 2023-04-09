@@ -1,0 +1,108 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: "jacoco"
+
+
+sourceCompatibility=14
+targetCompatibility=14
+
+repositories
+{
+	jcenter();
+}
+
+dependencies
+{
+	// JUnit 4 Support
+	testImplementation "junit:junit:4.13"
+	testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
+  	
+  	// JUnit 5
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.6.2" 
+	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+		
+	// Asssert J
+	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.15.0'
+	
+	// Parameterized tests
+	testImplementation("org.junit.jupiter:junit-jupiter-params:5.6.2")
+	
+	// Migration Support to Enable Rules in JUnit 5
+	testImplementation "org.junit.jupiter:junit-jupiter-migrationsupport:5.6.2"
+	
+	// https://mvnrepository.com/artifact/org.mockito/mockito-core
+	testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.4.2'	
+}
+
+// JUnit 5 aktivieren
+test {
+    useJUnitPlatform()
+}
+
+
+tasks.withType(JavaCompile) {	
+	// Aktivierung von Switch Expressions Preview  (JDK 13) / Textblocks (JDK 14)
+	options.compilerArgs += ["--enable-preview"] 
+}
+
+test {
+	// für die Beispiele wollen wir Fehler nicht als Build-Fehler werten, da die Beispiel
+	// bewusst ein paar Fehler integriert haben
+  	ignoreFailures = true
+
+	// Aktivierung von Switch Expressions 
+    jvmArgs '--enable-preview'
+}
+
+
+// Ausführbare Programme
+apply from: "appTasks.txt"
+
+
+
+// ---------------------------------- DISTRIBUTION / EXECUTABLES ------------------------------
+
+jar {
+
+  archiveBaseName = "Java-Challenge"
+
+  manifest {
+    attributes(
+               "Created-By"             : "Michael Inden",
+	                "Specification-Title"    : "Java-Challenge",
+	                "Specification-Version"  : "1",
+	                "Specification-Vendor"   : "Michael Inden",
+	                "Implementation-Title"   : "Java-Challenge",
+	                "Implementation-Version" : "1",
+	                "Implementation-Vendor"  : "Michael Inden")
+  }
+}
+
+// Eigene Tasks 
+// ------------
+
+def executeClass(final String mainName)  {
+
+	javaexec {
+	   	main = mainName
+	   	classpath = files("${buildDir}/libs/Java-Challenge.jar") + files("${buildDir}/requiredLibs")
+	}
+}
+
+def executeClassPreviewEnabled(final String mainName)  {
+
+	javaexec {
+	    jvmArgs += ['--enable-preview']
+	   	main = mainName
+	   	classpath = files("${buildDir}/libs/Java-Challenge.jar") + files("${buildDir}/requiredLibs")
+	}
+}
+
+def executeClassWithAssertionsEnabled(final String mainName)  {
+
+	javaexec {
+		jvmArgs += ['-ea']
+	   	main = mainName
+	   	classpath = files("${buildDir}/libs/Java-Challenge.jar") + files("${buildDir}/requiredLibs")
+	}
+}
