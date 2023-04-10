@@ -1,6 +1,9 @@
 package net.c0r3.javachallanges;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Exercise 2.2
@@ -20,21 +23,17 @@ public class Ex01_Basic {
    */
   record ResultCalcSumAndCount(int sum, int count){}
   public static ResultCalcSumAndCount calcSumAndCountAllNumberDivBy_2_Or_7(int x) {
-    var foundNumbers = new ArrayList<Integer>();
+    var numbers = IntStream.range(1, x)
+        .filter(i -> isEven(i) || (i % 7 == 0))
+        .boxed()
+        .toList();
 
-    for (int i = 1; i < x; i++) {
+    var sum = numbers.stream().reduce(Integer::sum).orElse(0);
 
-      if (i % 2 == 0) {
-        foundNumbers.add(i);
-      } else if (i % 7 == 0) {
-        foundNumbers.add(i);
-      }
-    }
-
-    var sum =  foundNumbers.stream().reduce(Integer::sum).orElse(0);
-    return new ResultCalcSumAndCount(sum, foundNumbers.size());
+    return new ResultCalcSumAndCount(sum, numbers.size());
   }
-  
 
-
+  public static boolean isEven(int x) {
+    return x % 2 == 0;
+  }
 }
