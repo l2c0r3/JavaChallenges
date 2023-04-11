@@ -5,13 +5,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.c0r3</groupId>
+    <groupId>ch.c0r3</groupId>
     <artifactId>javachallanges</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
     <modules>
         <module>_2_math</module>
+        <module>_x_solution</module>
     </modules>
 
 </project>

@@ -1,0 +1,46 @@
+// CH 4
+
+task TwoDimArrayWorldExample			(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch04_arrays.intro.TwoDimArrayWorldExample") } }
+task RandomTraversalDirectionExample	(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch04_arrays.intro.RandomTraversalDirectionExample") } }
+
+// CH 5
+
+task MonthAndDayOfWeekExample			(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.MonthAndDayOfWeekExample") } }
+task LocalDateAndTimeExample			(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.LocalDateAndTimeExample") } }
+task DatesUntilExample					(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.DatesUntilExample") } }
+task ZonedDateTimeExample				(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.ZonedDateTimeExample") } }
+task ZoneIdExample						(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.ZoneIdExample") } }
+task DurationExample					(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.DurationExample") } }
+task PeriodExample						(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.PeriodExample") } }
+task TemporalAdjustersExample			(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.TemporalAdjustersExample") } }
+task FormattingAndParsingExample		(dependsOn: jar, group: 'JavaChallenge') { doLast { executeClassPreviewEnabled("ch05_dateprocessing.intro.FormattingAndParsingExample") } }
+
+
+// Anhang
+
+task JUnit5ExampleTest(dependsOn: test) {	
+	doLast {
+    	browse 'build/reports/tests/test/classes/appendix_junit.JUnit5ExampleTest.html'
+    }
+}
+
+task AssertThrowsTest(dependsOn: test) {	
+	doLast {
+    	browse'build/reports/tests/test/classes/appendix_junit.AssertThrowsTest.html'
+    }
+}
+
+task FirstParameterizedTest(dependsOn: test) {	
+	doLast {
+    	browse'build/reports/tests/test/classes/appendix_junit.FirstParameterizedTest.html'
+    }
+}
+
+ def browse(filepath) {
+    def os = org.gradle.internal.os.OperatingSystem.current()
+    if (os.isWindows()) {
+        exec { commandLine 'cmd', '/c', "start " + filepath }
+    } else if (os.isMacOsX()) {
+        exec { commandLine 'open', filepath }
+    }
+}
