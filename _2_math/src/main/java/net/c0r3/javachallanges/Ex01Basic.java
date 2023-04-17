@@ -83,7 +83,7 @@ public class Ex01Basic {
   }
 
   private static List<Integer> divisorsOf(int number){
-    return IntStream.range(1, number)
+    return IntStream.range(1, number / 2 + 1)
             .filter(value -> number % value == 0)
             .boxed()
             .toList();
