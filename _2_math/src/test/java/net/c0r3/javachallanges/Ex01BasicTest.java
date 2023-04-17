@@ -47,4 +47,19 @@ class Ex01BasicTest {
             Arguments.of(10_000, List.of(6,28,496,8128))
     );
   }
+
+  @ParameterizedTest
+  @MethodSource("calcPrimeNumbersData")
+  void calcPrimeNumbersTest(int number, List<Integer> expectedPerfectNumbers) {
+    var actual = Ex01Basic.calcPrimesUpTo(number);
+    assertEquals(expectedPerfectNumbers, actual);
+  }
+
+  static Stream<Arguments> calcPrimeNumbersData() {
+    return Stream.of(
+        Arguments.of(15, List.of(2,3,5,7,11,13)),
+        Arguments.of(25, List.of(2,3,5,7,11,13,17,19,23)),
+        Arguments.of(50, List.of(2,3,5,7,11,13,17,19,23,29,31,37,41,43,47))
+    );
+  }
 }
