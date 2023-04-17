@@ -1,9 +1,14 @@
 package net.c0r3.javachallanges;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Ex01BasicTest {
 
@@ -27,5 +32,19 @@ class Ex01BasicTest {
   void numberAsTextString(int number, String expectedText) {
     var actual = Ex01Basic.numberAsText(number);
     assertEquals(expectedText, actual);
+  }
+
+  @ParameterizedTest
+  @MethodSource("calcPerfectNumberData")
+  void calcPerfectNumber(int number, List<Integer> expectedPerfectNumbers) {
+    var actual = Ex01Basic.calcPerfectNumber(number);
+    assertEquals(expectedPerfectNumbers, actual);
+  }
+
+  static Stream<Arguments> calcPerfectNumberData() {
+    return Stream.of(
+            Arguments.of(1_000, List.of(6,28,496)),
+            Arguments.of(10_000, List.of(6,28,496,8128))
+    );
   }
 }
