@@ -1,5 +1,8 @@
 package net.c0r3.javachallanges;
 
+import java.util.HashMap;
+import net.c0r3.javachallanges.b_math.Ex01Basic;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -61,5 +64,20 @@ class Ex01BasicTest {
         Arguments.of(25, List.of(2,3,5,7,11,13,17,19,23)),
         Arguments.of(50, List.of(2,3,5,7,11,13,17,19,23,29,31,37,41,43,47))
     );
+  }
+
+  @Test
+  void getPrimeTwinPair() {
+
+    var expected = new HashMap<Integer, Integer>() {{
+      put(3,5);
+      put(5,7);
+      put(11,13);
+      put(17,19);
+      put(29,31);
+      put(41,43);
+    }};
+    var actual = Ex01Basic.getPrimeTwinPair(50);
+    assertEquals(expected, actual);
   }
 }
