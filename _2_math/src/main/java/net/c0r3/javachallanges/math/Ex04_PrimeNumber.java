@@ -1,4 +1,4 @@
-package net.c0r3.javachallanges.b_math;
+package net.c0r3.javachallanges.math;
 
 import java.util.ArrayList;
 import java.util.List;
