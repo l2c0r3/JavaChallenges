@@ -16,7 +16,7 @@ public class Ex06_Checksum {
     var sum = 0;
     for (int i = 0; i < arr.length; i++) {
 //      sum += (i + 1) * Integer.valueOf(String.valueOf(arr[i]));
-      // TODO: Big learning: https://stackoverflow.com/questions/12927087/what-does-string-0-do-string-is-a-char
+      // TODO: Big learning: https://stackoverflow.com/questions/34409950/what-does-0-do-in-java
       sum += (i + 1) * (arr[i] - '0');
     }
     return sum % 10;
