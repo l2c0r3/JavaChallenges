@@ -1,4 +1,4 @@
-This are my solutions to the "Java Challanges" by Michael Inden.
+These are my solutions to the "Java Challanges" by Michael Inden.
 
 - ISBN Print: 978-3-86490-756-2
 - ISBN Bundle: 978-3-96910-182-7
